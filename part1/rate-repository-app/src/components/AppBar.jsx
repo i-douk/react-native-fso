@@ -1,21 +1,27 @@
-import { View, StyleSheet } from 'react-native';
-import Constants from 'expo-constants';
+import { View, StyleSheet, ScrollView } from 'react-native';
 import AppBarTab from './AppBarTab';
 import theme from '../theme';
 const styles = StyleSheet.create({
   container: {
     backgroundColor :theme.colors.textPrimary,
     padding :20,
-    flexDirection : 'row',
-    justifyContent: 'space-around'
   },
+  scroll: {
+    flexDirection: 'row',
+    gap : 10
+  }
 });
 
 const AppBar = () => {
-  return <View style={styles.container}>
-   <AppBarTab tab='repositories' route='/' />
-   <AppBarTab tab='signIn' route='/signin' />
+  return (
+  <View style={styles.container}>
+   <ScrollView horizontal contentContainerStyle={styles.scroll} >
+     <AppBarTab tab='repositories' route='/' />
+     <AppBarTab tab='Sign In' route='/signin' />
+   </ScrollView>
+  
   </View>
+  );
 };
 
 export default AppBar
