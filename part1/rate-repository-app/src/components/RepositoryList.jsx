@@ -1,45 +1,6 @@
 import React from 'react';
-import { FlatList, View, StyleSheet, Text, Image } from 'react-native';
-
-const styles = StyleSheet.create({
-  separator: {
-    height: 10,
-  },
-  itemContainer: {
-    padding: 10,
-    backgroundColor: '#fff',
-  },
-  avatar: {
-    width: 50,
-    height: 50,
-    borderRadius: 25,
-  },
-  itemHeader: {
-    flexDirection: 'row',
-    marginBottom: 10,
-  },
-  itemDetails: {
-    marginLeft: 10,
-    justifyContent: 'center',
-  },
-  fullName: {
-    fontWeight: 'bold',
-    fontSize: 16,
-  },
-  description: {
-    fontSize: 14,
-    color: '#586069',
-  },
-  language: {
-    fontSize: 14,
-    color: '#0366d6',
-    marginTop: 5,
-    padding: 5,
-    backgroundColor: '#f1f8ff',
-    alignSelf: 'flex-start',
-    borderRadius: 3,
-  },
-});
+import { FlatList } from 'react-native';
+import RepositoryItem , { ItemSeparator } from './RepositoryItem';
 
 const repositories = [
   {
@@ -88,24 +49,6 @@ const repositories = [
   },
 ];
 
-const ItemSeparator = () => <View style={styles.separator} />;
-
-const RepositoryItem = ({ item }) => (
-  <View style={styles.itemContainer}>
-    <View style={styles.itemHeader}>
-      <Image style={styles.avatar} source={{ uri: item.ownerAvatarUrl }} />
-      <View style={styles.itemDetails}>
-        <Text style={styles.fullName}>{item.fullName}</Text>
-        <Text style={styles.description}>{item.description}</Text>
-        <Text style={styles.language}>{item.language}</Text>
-      </View>
-    </View>
-    <Text>Stars: {item.stargazersCount}</Text>
-    <Text>Forks: {item.forksCount}</Text>
-    <Text>Reviews: {item.reviewCount}</Text>
-    <Text>Rating: {item.ratingAverage}</Text>
-  </View>
-);
 
 const RepositoryList = () => {
   return (
