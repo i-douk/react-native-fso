@@ -1,6 +1,15 @@
 import React from 'react';
 import { StyleSheet , View, Image } from 'react-native';
 import Text from './Text';
+
+function abbrev(number) {
+    const formatter = new Intl.NumberFormat('en', {
+        notation: 'compact',
+        compactDisplay: 'short',
+        maximumSignificantDigits: 3
+    });
+return formatter.format(number);
+}
 const styles = StyleSheet.create({
     separator: {
       height: 10,
@@ -65,20 +74,20 @@ const RepositoryItem = ({ item }) => (
       </View>
       <View style={styles.detailContainer}>
         <View style={styles.detail}>
-        <Text fontWeight='bold'>Stars</Text>
-        <Text>{item.stargazersCount}</Text>
+        <Text fontWeight='bold'>{abbrev(item.stargazersCount)}</Text>
+        <Text >Stars</Text>
         </View>
         <View style={styles.detail}>
-        <Text fontWeight='bold'>Forks</Text>
-        <Text>{item.forksCount}</Text>
+        <Text fontWeight='bold'>{abbrev(item.forksCount)}</Text>
+        <Text >Forks</Text>
         </View>
         <View style={styles.detail}>
-        <Text fontWeight='bold'>Reviews</Text>
-        <Text>{item.reviewCount}</Text>
+        <Text fontWeight='bold'>{item.reviewCount}</Text>
+        <Text >Reviews</Text>
         </View>
         <View style={styles.detail}>
-        <Text fontWeight='bold'>Rating</Text>
-        <Text>{item.ratingAverage}</Text>
+        <Text fontWeight='bold'>{item.ratingAverage}</Text>
+        <Text>Rating</Text>
         </View>
       </View>
     </View>
