@@ -17,6 +17,15 @@ const theme = {
       normal: '400',
       bold: '700',
     },
+    borders: {
+      primary: '2px solid gray'
+    },
+    backGround: {
+      blue: '#0096FF'
+    },
+    paddings : {
+      button : '20'
+    }
   };
   
   export default theme;

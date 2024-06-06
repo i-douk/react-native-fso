@@ -24,9 +24,15 @@ const styles = StyleSheet.create({
   fontWeightBold: {
     fontWeight: theme.fontWeights.bold,
   },
+  borders: {
+    border: theme.borders.primary
+  },
+  backgrounds: {
+    backgroundColor: theme.backGround.blue
+  }
 });
 
-const Text = ({ color, fontSize, fontWeight, style, ...props }) => {
+const Text = ({ color, fontSize, fontWeight, style, backgroundColor, border, ...props }) => {
   const textStyle = [
     styles.text,
     color === 'textSecondary' && styles.colorTextSecondary,
@@ -34,6 +40,8 @@ const Text = ({ color, fontSize, fontWeight, style, ...props }) => {
     color === 'white' && styles.colorWhite,
     fontSize === 'subheading' && styles.fontSizeSubheading,
     fontWeight === 'bold' && styles.fontWeightBold,
+    backgroundColor === 'blue' && styles.backgrounds,
+    border === 'primary' && styles.borders,
     style,
   ];
 
