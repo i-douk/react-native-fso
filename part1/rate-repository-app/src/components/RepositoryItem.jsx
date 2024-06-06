@@ -10,6 +10,7 @@ function abbrev(number) {
     });
 return formatter.format(number);
 }
+
 const styles = StyleSheet.create({
     separator: {
       height: 10,
