@@ -4,10 +4,11 @@ import RepositoryItem , { ItemSeparator } from './RepositoryItem';
 import useRepositories from '../hooks/useRepositories';
 
 const RepositoryList = () => {
-  const repositories = useRepositories() 
+  const { repositories } = useRepositories() 
+  console.log(repositories) 
   // Get the nodes from the edges array
-  const repositoryNodes = repositories
-    ? repositories.edges.map(edge => edge.node)
+  const repositoryNodes = repositories && repositories.edges ?
+   repositories.edges.map(edge => edge.node)
     : [];
   return (
     <FlatList
