@@ -1,20 +1,24 @@
 import React from 'react';
 import { FlatList } from 'react-native';
 import RepositoryItem , { ItemSeparator } from './RepositoryItem';
-import useRepositories from '../hooks/useRepositories';
+import { GET_REPOSITORIES } from '../graphql/queries';
+import { useQuery } from '@apollo/client';
 
 const RepositoryList = () => {
-  const { repositories } = useRepositories() 
-  console.log(repositories) 
-  // Get the nodes from the edges array
-  const repositoryNodes = repositories && repositories.edges ?
-   repositories.edges.map(edge => edge.node)
-    : [];
+  const result = useQuery(GET_REPOSITORIES ,
+    {
+      fetchPolicy: 'cache-and-network',
+    }
+  )
+  if (result.loading) {
+    return <div> data loading...</div>
+  }
+  const repositiriesNodes = result.data.repositories.edges
   return (
     <FlatList
-      data={repositoryNodes}
+      data={repositiriesNodes}
       ItemSeparatorComponent={ItemSeparator}
-      renderItem={({ item }) => <RepositoryItem item={item} />}
+      renderItem={({ item }) => <RepositoryItem item={item.node} />}
       keyExtractor={(item) => item.id}
     />
   );
