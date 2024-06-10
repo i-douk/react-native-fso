@@ -5,6 +5,7 @@ import * as yup from 'yup';
 import useSignIn from '../hooks/useSignIn';
 import Text from './Text';
 import theme from '../theme';
+import AuthStorage from '../utils/authStorage';
 
 const validationSchema = yup.object().shape({
   username: yup
@@ -94,7 +95,8 @@ const SignIn = () => {
     try {
       const data = await signIn({ username, password });
       console.log('Access Token:', data);
-      // Handle the token (e.g., save it to local storage, redirect, etc.)
+      console.log(typeof data)
+      AuthStorage.setAccessToken(data)
     } catch (e) {
       console.log('Error signing in:', e);
     }
