@@ -1,9 +1,10 @@
 import React from 'react';
-import Text from './Text';
 import { Pressable, TextInput, View, StyleSheet } from 'react-native';
 import { useFormik } from 'formik';
-import theme from '../theme';
 import * as yup from 'yup';
+import useSignIn from '../hooks/useSignIn';
+import Text from './Text';
+import theme from '../theme';
 
 const validationSchema = yup.object().shape({
   username: yup
@@ -39,10 +40,6 @@ const styles = StyleSheet.create({
 const initialValues = {
   username: '',
   password: '',
-};
-
-const onSubmit = (values) => {
-  console.log(values);
 };
 
 const SignInForm = ({ onSubmit }) => {
@@ -89,6 +86,20 @@ const SignInForm = ({ onSubmit }) => {
 };
 
 const SignIn = () => {
+  const [signIn] = useSignIn();
+
+  const onSubmit = async (values) => {
+    const { username, password } = values;
+
+    try {
+      const data = await signIn({ username, password });
+      console.log('Access Token:', data);
+      // Handle the token (e.g., save it to local storage, redirect, etc.)
+    } catch (e) {
+      console.log('Error signing in:', e);
+    }
+  };
+
   return <SignInForm onSubmit={onSubmit} />;
 };
 
