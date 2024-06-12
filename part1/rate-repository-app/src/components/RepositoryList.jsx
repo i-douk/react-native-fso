@@ -6,13 +6,12 @@ import { useQuery } from '@apollo/client';
 
 const RepositoryList = () => {
   const result = useQuery(GET_REPOSITORIES ,
-    {
-      fetchPolicy: 'cache-and-network',
-    }
+    { fetchPolicy: 'cache-and-network' }
   )
   if (result.loading) {
     return <div> data loading...</div>
   }
+  console.log(result)
   const repositiriesNodes = result.data.repositories.edges
   return (
     <FlatList
