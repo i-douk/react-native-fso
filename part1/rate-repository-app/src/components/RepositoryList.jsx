@@ -3,13 +3,14 @@ import { FlatList } from 'react-native';
 import RepositoryItem , { ItemSeparator } from './RepositoryItem';
 import { GET_REPOSITORIES } from '../graphql/queries';
 import { useQuery } from '@apollo/client';
+import Text from './Text';
 
 const RepositoryList = () => {
   const result = useQuery(GET_REPOSITORIES ,
     { fetchPolicy: 'cache-and-network' }
   )
   if (result.loading) {
-    return <div> data loading...</div>
+    return <Text>data loading...</Text>
   }
   console.log(result)
   const repositiriesNodes = result.data.repositories.edges

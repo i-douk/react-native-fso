@@ -93,7 +93,7 @@ const SignIn = () => {
 
     try {
       const data = await signIn({ username, password });
-      console.log('Access Token:', data);
+      console.log('Access Token:', data.authenticate.accessToken);
     } catch (e) {
       console.log('Error signing in:', e);
     }
