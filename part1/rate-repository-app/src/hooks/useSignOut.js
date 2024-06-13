@@ -2,13 +2,13 @@ import { useApolloClient } from '@apollo/client';
 import useAuthStorage from './useAuthStorage';
 
 const useSignOut = () => {
-  const client = useApolloClient();
+  const apolloClient = useApolloClient();
   const authStorage = useAuthStorage()
 
   const signOut = () => {
     authStorage.removeAccessToken('accessToken');
 
-    client.clearStore();
+    apolloClient.resetStore();
 
   };
 

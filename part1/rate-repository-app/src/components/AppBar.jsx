@@ -19,18 +19,22 @@ const styles = StyleSheet.create({
 const AppBar = () => {
   const authStorage = useAuthStorage();
   const accessToken = authStorage.getAccessToken()
-  const result = useQuery(ME , { 
+  console.log(accessToken)
+  const result = useQuery( ME , { 
     headers : { 
       Authorization : `Bearer ${accessToken}`
     }
   })
-  console.log(result.data)
+  console.log(result.data?.me)
   return (
   <View style={styles.container}>
    <ScrollView horizontal contentContainerStyle={styles.scroll} >
      <AppBarTab tab='Repositories' route='/' />
-     { result.data && <AppBarTab tab='Sign Out' route='/signout' />}
-     { !result.data && <AppBarTab tab='Sign In' route='/signin' />}
+     { result.data.me ? 
+      <AppBarTab tab='Sign In' route='/signin' /> 
+      :
+      <AppBarTab tab='Sign out' route='/signout' />}
+
    </ScrollView>
   </View>
   );

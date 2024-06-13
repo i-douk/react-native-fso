@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-native';
 import useSignOut from '../hooks/useSignOut';
 
@@ -9,7 +9,7 @@ const SignOut = () => {
   useEffect(() => {
     signOut();
     navigate('/signin');
-  }, [signOut, navigate]);
+  }, [signOut]);
 
   return null;
 };
