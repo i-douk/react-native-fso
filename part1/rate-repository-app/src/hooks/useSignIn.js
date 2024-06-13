@@ -4,11 +4,11 @@ import useAuthStorage from '../hooks/useAuthStorage';
 import { useApolloClient } from '@apollo/client';
 const useSignIn = () => {
   const authStorage = useAuthStorage();
+  const apolloClient = useApolloClient();
 
   const [mutate, result] = useMutation(AUTHENTICATE);
 
   const signIn = async ({ username, password }) => {
-    const apolloClient = useApolloClient();
     const credentials = {
       username,
       password
@@ -16,7 +16,6 @@ const useSignIn = () => {
 
     try {
       const {data} = await mutate({ variables: { credentials } });
-      console.log(data)
       await authStorage.setAccessToken(data.authenticate.accessToken)
       apolloClient.resetStore();
       return data;
