@@ -46,8 +46,8 @@ const initialValues = {
   const SignInForm = ({ onSubmit }) => {
     const formik = useFormik({
       initialValues,
-    validationSchema,
-    onSubmit,
+      validationSchema,
+      onSubmit,
   });
 
   return (
@@ -86,7 +86,7 @@ const initialValues = {
   );
   };
 
-  const SignIn = () => {
+const SignIn = () => {
     const navigate = useNavigate()
     const [signIn] = useSignIn();
 
@@ -96,7 +96,7 @@ const initialValues = {
     try {
       const data = await signIn({ username, password });
       console.log('Access Token:', data.authenticate.accessToken);
-      navigate('/repositories')
+      navigate('/');
     } catch (e) {
       console.log('Error signing in:', e);
     }
