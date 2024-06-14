@@ -87,7 +87,7 @@ const initialValues = {
   };
 
 const SignIn = () => {
-    const navigate = useNavigate()
+    const navigate = useNavigate();
     const [signIn] = useSignIn();
 
   const onSubmit = async (values) => {
@@ -96,7 +96,6 @@ const SignIn = () => {
     try {
       const data = await signIn({ username, password });
       navigate('/repositories');
-      console.log('Access Token:', data?.authenticate.accessToken);
     } catch (e) {
       console.log('Error signing in:', e);
     }

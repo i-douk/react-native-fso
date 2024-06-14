@@ -12,7 +12,6 @@ const RepositoryList = () => {
   if (result.loading) {
     return <Text>data loading...</Text>
   }
-  console.log(result)
   const repositiriesNodes = result.data.repositories.edges
   return (
     <FlatList

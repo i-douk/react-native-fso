@@ -4,6 +4,7 @@ import theme from '../theme';
 import { useQuery } from '@apollo/client';
 import { ME } from '../graphql/queries';
 import useAuthStorage from '../hooks/useAuthStorage';
+import Text from './Text';
 
 const styles = StyleSheet.create({
   container: {
@@ -18,23 +19,26 @@ const styles = StyleSheet.create({
 
 const AppBar = () => {
   const authStorage = useAuthStorage();
-  const accessToken = authStorage.getAccessToken()
-  console.log(accessToken)
+  const accessToken = authStorage.getAccessToken().catch(e=>console.log(e))
+
   const result = useQuery( ME , { 
     headers : { 
       Authorization : `Bearer ${accessToken}`
     }
   })
-  console.log(result.data?.me)
+  console.log(result)
+  if(result.loading) {
+    return <Text>connecting</Text>
+  }
+
   return (
   <View style={styles.container}>
    <ScrollView horizontal contentContainerStyle={styles.scroll} >
      <AppBarTab tab='Repositories' route='/' />
-     { result.data.me ? 
+     {result.data.me===null ? 
       <AppBarTab tab='Sign In' route='/signin' /> 
       :
       <AppBarTab tab='Sign out' route='/signout' />}
-
    </ScrollView>
   </View>
   );
