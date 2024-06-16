@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet , View, Image } from 'react-native';
 import Text from './Text';
+import { Link } from 'react-router-native';
 
 export function abbrev(number) {
     const formatter = new Intl.NumberFormat('en', {
@@ -63,12 +64,16 @@ const styles = StyleSheet.create({
 
 export const ItemSeparator = () => <View style={styles.separator} />;
 
-const RepositoryItem = ({ item }) => (
+const RepositoryItem = ({ item }) => {
+
+  return (
     <View testID="repositoryItem" style={styles.itemContainer}>
       <View style={styles.itemHeader}>
         <Image style={styles.avatar} source={{ uri: item.ownerAvatarUrl }} />
         <View style={styles.itemDetails}>
-          <Text style={styles.fullName}>{item.fullName}</Text>
+          <Link to={`/repository/${item.id}`}>
+            <Text style={styles.fullName}>{item.fullName}</Text>
+          </Link>
           <Text style={styles.description}>{item.description}</Text>
           <Text style={styles.language}>{item.language}</Text>
         </View>
@@ -93,6 +98,7 @@ const RepositoryItem = ({ item }) => (
       </View>
     </View>
   );
+}
 
   export default RepositoryItem;
   
