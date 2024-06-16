@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet , View, Image } from 'react-native';
 import Text from './Text';
 
-function abbrev(number) {
+export function abbrev(number) {
     const formatter = new Intl.NumberFormat('en', {
         notation: 'compact',
         compactDisplay: 'short',
@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
 export const ItemSeparator = () => <View style={styles.separator} />;
 
 const RepositoryItem = ({ item }) => (
-    <View style={styles.itemContainer}>
+    <View testID="repositoryItem" style={styles.itemContainer}>
       <View style={styles.itemHeader}>
         <Image style={styles.avatar} source={{ uri: item.ownerAvatarUrl }} />
         <View style={styles.itemDetails}>
