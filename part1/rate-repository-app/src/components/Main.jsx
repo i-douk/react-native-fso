@@ -4,7 +4,7 @@ import RepositoryList from './RepositoryList';
 import AppBar from './AppBar';
 import SignIn from './SignIn';
 import SignOut from './SignOut';
-import SingleRepositoryView from './SingleRepositoryView';
+import SingleRepository from './SingleRepositoryView';
 const styles = StyleSheet.create({
   container: {
     flexGrow: 1,
@@ -20,7 +20,7 @@ const Main = () => {
         <Route path="/" element={<RepositoryList />} />
         <Route path="/signin" element={<SignIn />} />
         <Route path="/signout" element={<SignOut />} />
-        <Route path="/repository/:repositoryId" element={<SingleRepositoryView />} />
+        <Route path="/repository/:repositoryId" element={<SingleRepository />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </View>

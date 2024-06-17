@@ -14,3 +14,21 @@ export const REPOSITORY_FIELDS = gql`
     url
   }
 `;
+export const REPOSITORY_REVIEWS = gql`
+  fragment RepositoryReviews on Repository {
+      reviews {
+        edges {
+          node {
+            id
+            text
+            rating
+            createdAt
+            user {
+              id
+              username
+            }
+          }
+        }
+    }
+  }
+`;
