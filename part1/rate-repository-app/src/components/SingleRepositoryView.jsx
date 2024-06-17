@@ -1,35 +1,34 @@
 import React from 'react';
 import { View, StyleSheet, Pressable } from 'react-native';
-import { GET_REPOSITORIES } from '../graphql/queries';
 import { useQuery } from '@apollo/client';
+import { GET_REPOSITORY } from '../graphql/queries';
 import RepositoryItem from './RepositoryItem';
 import { useParams } from 'react-router-native';
 import Text from './Text';
 
 const SingleRepositoryView = () => {
-
   const { repositoryId } = useParams();
-  const { loading, data, error } = useQuery(GET_REPOSITORIES, {
-    fetchPolicy: 'cache-and-network'
+
+  const { loading, error, data } = useQuery(GET_REPOSITORY, {
+    variables: { id: repositoryId }
   });
 
   if (loading) {
-    return <Text>Data loading...</Text>;
+    return <Text>Loading ...</Text>;
   }
 
   if (error) {
     return <Text>Error loading data.</Text>;
   }
-  const repositoryNodes = data.repositories.edges.map(edge => edge.node);
-  const matchingRepo = repositoryNodes.find(repo => repo.id === repositoryId);
-  console.log(matchingRepo)
+
+  const repository = data?.repository;
+
   return (
     <View style={styles.container}>
-      <RepositoryItem item={matchingRepo} />
-      <Pressable style={styles.button} onPress={() => window.open(matchingRepo.url)}>
-        <Text fontWeight='bold' color='white' >Open in Github</Text>
+      <RepositoryItem item={repository} />
+      <Pressable style={styles.button} onPress={() => window.open(repository.url)}>
+        <Text fontWeight='bold' color='white'>Open in Github</Text>
       </Pressable>
-          
     </View>
   );
 };

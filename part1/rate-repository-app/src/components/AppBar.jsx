@@ -26,7 +26,6 @@ const AppBar = () => {
       Authorization : `Bearer ${accessToken}`
     }
   })
-  console.log(result)
   if(result.loading) {
     return <Text>connecting</Text>
   }
