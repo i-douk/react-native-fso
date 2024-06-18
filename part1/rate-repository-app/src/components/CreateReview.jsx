@@ -20,7 +20,7 @@ const validationSchema = yup.object().shape({
     .number()
     .min(0).max(100)
     .required('Rating is required'),
-  review: yup.string()
+  text: yup.string()
 });
 
 const styles = StyleSheet.create({
@@ -49,7 +49,7 @@ const initialValues = {
   ownerName: '',
   repositoryName: '',
   rating: '',
-  review: ''
+  text: ''
 };
 
 export const CreateReviewForm = ({ onSubmit }) => {
@@ -94,6 +94,7 @@ export const CreateReviewForm = ({ onSubmit }) => {
         ]}
         placeholder="Rating between 0 and 100"
         value={formik.values.rating}
+        keyboardType="numeric"
         onChangeText={formik.handleChange('rating')}
         onBlur={formik.handleBlur('rating')}
       />
@@ -103,17 +104,17 @@ export const CreateReviewForm = ({ onSubmit }) => {
       <TextInput
         style={[
           styles.field,
-          formik.touched.review && formik.errors.review && styles.errorField,
+          formik.touched.text && formik.errors.text && styles.errorField,
         ]}
         textAlignVertical='top'
         multiline={true}
         placeholder="Review"
         value={formik.values.review}
-        onChangeText={formik.handleChange('review')}
-        onBlur={formik.handleBlur('review')}
+        onChangeText={formik.handleChange('text')}
+        onBlur={formik.handleBlur('text')}
       />
-      {formik.touched.review && formik.errors.review && (
-        <Text style={styles.errorText}>{formik.errors.review}</Text>
+      {formik.touched.text && formik.errors.text && (
+        <Text style={styles.errorText}>{formik.errors.text}</Text>
       )}
       <Pressable onPress={formik.handleSubmit} style={styles.button}>
         <Text style={{ color: 'white' }}>Create review</Text>
@@ -129,15 +130,27 @@ const CreateReview = () => {
   const [mutate, result] = useMutation(CREATE_REVIEW);
   
   const onSubmit = async (values) => {
-    const { ownerName, repositoryName, rating, review } = values;
-    console.log(values)
+    const { ownerName, repositoryName, rating, text } = values;
+    console.log("Submitted values:", { ownerName, repositoryName, rating, text });
+
     try {
       const accessToken = await authStorage.getAccessToken();
       const { data } = await mutate({
-        variables: { ownerName, repositoryName, rating: rating, text: review }
+        variables: { 
+          review: { 
+            ownerName, 
+            repositoryName, 
+            rating: parseInt(rating), 
+            text 
+          } 
+        },
+        context: {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        },
       });
       console.log(data);
-      console.log(result)
       navigate(`/repository/${data.createReview.repositoryId}`);
     } catch (e) {
       console.log('Error creating a new review:', e);
