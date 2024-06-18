@@ -9,6 +9,7 @@ import { FlatList } from 'react-native';
 import { ItemSeparator } from './RepositoryItem';
 import { format } from 'date-fns';
 import theme from '../theme';
+
 const RepositoryInfo = ({ repository }) => {
   return (
     <View style={styles.container}>
@@ -38,6 +39,7 @@ const ReviewItem = ({ review }) => {
   const SingleRepository = () => {
     const { repositoryId } = useParams();
     const { loading, error, data } = useQuery(GET_REPOSITORY, {
+      fetchPolicy: 'cache-and-network',
       variables: { id: repositoryId }
       });
       
@@ -89,9 +91,6 @@ const ReviewItem = ({ review }) => {
           height: 70,
           width: 70,
           textAlign: 'center',
-        },
-        reviewInfo : {
-
         }
       });
       export default SingleRepository;
