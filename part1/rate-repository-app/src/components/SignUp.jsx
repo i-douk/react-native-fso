@@ -117,7 +117,7 @@ const SignUp = () => {
     const { username, password } = values;
 
     try {
-        const { data } = await mutate({
+        await mutate({
             variables: { 
               user: { 
                 username,
@@ -126,11 +126,10 @@ const SignUp = () => {
             }
           });
 
-          setTimeout( async() => {
-            console.log("Delayed for 1 second.");
-            await signIn({ username, password });
-            navigate('/repositories');
-          }, "2000");
+        setTimeout( async() => {
+          await signIn({ username, password });
+          navigate('/repositories');
+        }, "2000");
           
     } catch (e) {
       console.log('Error signing in:', e);
