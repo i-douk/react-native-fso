@@ -3,8 +3,8 @@ import { REPOSITORY_FIELDS } from './fragments';
 import { REPOSITORY_REVIEWS } from './fragments';
 
 export const GET_REPOSITORIES = gql`
-  query GetRepositories($orderDirection: OrderDirection, $orderBy: AllRepositoriesOrderBy) {
-    repositories(orderDirection: $orderDirection, orderBy: $orderBy) {
+  query GetRepositories($orderDirection: OrderDirection, $orderBy: AllRepositoriesOrderBy , $searchKeyword: String) {
+    repositories(orderDirection: $orderDirection, orderBy: $orderBy , searchKeyword: $searchKeyword) {
       edges {
         node {
           ...RepositoryFields
