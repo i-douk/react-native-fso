@@ -42,6 +42,7 @@ const AppBar = () => {
       :
       <>
         <AppBarTab tab='Create a review' route='/create-review' />
+        <AppBarTab tab='My reviews' route='/myreviews' />
         <AppBarTab tab='Sign out' route='/signout' />
       </>
       }

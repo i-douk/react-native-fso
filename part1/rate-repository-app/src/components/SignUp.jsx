@@ -7,7 +7,6 @@ import theme from '../theme';
 import { useNavigate } from 'react-router-native';
 import { useMutation } from '@apollo/client';
 import { CREATE_USER } from '../graphql/mutations';
-import useAuthStorage from '../hooks/useAuthStorage';
 import useSignIn from '../hooks/useSignIn';
 
 const validationSchema = yup.object().shape({
